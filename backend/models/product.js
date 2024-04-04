@@ -11,7 +11,7 @@ const ProductSchema = new mongoose.Schema({
     desc: {
         type: String,
         required: true,
-        min: 8
+        min: 8,
     },
     price: {
         type: Number,
@@ -32,7 +32,7 @@ const ProductSchema = new mongoose.Schema({
     category: {
         type: String,
         required: true,
-    },
+    }
     
     });
 
