@@ -17,15 +17,17 @@ const UserSchema = new mongoose.Schema({
 
   password: {
     type: String,
-    required: true,
-    unique: true,
-    minlength: 6,
-    maxlength: 1024,
+    required : true,
+    unique : true,
+    minlength : 6,
+    maxlength : 1024,
   },
 
   isAdmin: {
     type: Boolean,
     default: false,
-  },
+  }
 
 });
+
+module.exports = mongoose.model("User", UserSchema);
