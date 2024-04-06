@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
 const UserSchema = new mongoose.Schema({
   username: {
@@ -8,26 +9,34 @@ const UserSchema = new mongoose.Schema({
     trim: true,
     minlength: 3,
   },
-
   email: {
     type: String,
     required: true,
     unique: true,
   },
-
   password: {
     type: String,
-    required : true,
-    unique : true,
-    minlength : 6,
-    maxlength : 1024,
+    required: true,
+    minlength: 6,
   },
-
   isAdmin: {
     type: Boolean,
     default: false,
-  }
-
+  },
 });
 
-module.exports = mongoose.model("User", UserSchema);
+// Hash password before saving to the database
+UserSchema.pre("save", async function (next) {
+  try {
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(this.password, salt);
+    this.password = hashedPassword;
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
+
+const User = mongoose.model("User", UserSchema);
+
+module.exports = User;
