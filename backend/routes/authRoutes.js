@@ -1,8 +1,8 @@
 const express = require("express");
 const authController = require("../controllers/authController.js");
 const authRoutes = express.Router();
-const productController = require("./controllers/productController.js");
-const { verifyToken, verifyTokenAdmin } = require("../middlewares.verifyToken");
+const productController = require("../controllers/productController.js"); 
+const { verifyToken, verifyTokenAdmin } = require("../middlewares/verifyToken.js");
 
 
 // router.get('/users', authController.getAllUsers);

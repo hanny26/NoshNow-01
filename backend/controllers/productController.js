@@ -1,7 +1,7 @@
 const Product = require('../models/Product');
 
 // Get all products
-exports.getAllProducts = async (req, res) => {
+const getAllProducts = async (req, res) => {
     try {
         const products = await Product.find(req.query);
         return res.status(200).json(products);
@@ -12,7 +12,7 @@ exports.getAllProducts = async (req, res) => {
 };
 
 // Get one product by ID
-exports.getProductById = async (req, res) => {
+const getProductById = async (req, res) => {
     try {
         const productId = req.params.id;
         const product = await Product.findById(productId);
@@ -27,7 +27,7 @@ exports.getProductById = async (req, res) => {
 };
 
 // Create product
-exports.createProduct = async (req, res) => {
+const createProduct = async (req, res) => {
     try {
         // Basic validation, ensuring required fields are present
         const { name, description, price } = req.body;
@@ -47,4 +47,10 @@ exports.createProduct = async (req, res) => {
         console.error(error);
         return res.status(500).json({ error: 'Server Error' });
     }
+};
+
+module.exports = {
+    getAllProducts,
+    getProductById,
+    createProduct
 };
