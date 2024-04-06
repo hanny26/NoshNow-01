@@ -52,7 +52,7 @@ async function login(req, res) {
     }
 
     // Generate JWT token
-    const token = jwt.sign({ email: user.email }, 'your_secret_key_here', { expiresIn: '1h' });
+    const token = jwt.sign({ email: user.email, isAdmin: user.isAdmin },proccess.env.JWT_SECRET, { expiresIn: '1h' });
 
     return res.status(200).json({ message: 'Login successful', token });
   } catch (error) {
