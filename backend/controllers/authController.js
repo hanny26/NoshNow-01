@@ -1,6 +1,6 @@
-const bcrypt = require("bcrypt");
-const User = require("../models/User.js");
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const User = require('../models/User');
 
 // Register a new user
 async function register(req, res) {
@@ -40,17 +40,19 @@ async function login(req, res) {
     // Find the user by email
     const user = await User.findOne({ email });
     if (!user) {
+      console.log('User not found');
       return res.status(401).json({ message: 'Invalid email or password' });
     }
 
     // Check if the password is correct
     const passwordMatch = await bcrypt.compare(password, user.password);
     if (!passwordMatch) {
+      console.log('Password does not match');
       return res.status(401).json({ message: 'Invalid email or password' });
     }
 
     // Generate JWT token
-    const token = jwt.sign({ email: user.email }, JWT_SECRET, { expiresIn: '3d' });
+    const token = jwt.sign({ email: user.email }, 'your_secret_key_here', { expiresIn: '1h' });
 
     return res.status(200).json({ message: 'Login successful', token });
   } catch (error) {
@@ -59,5 +61,7 @@ async function login(req, res) {
   }
 }
 
-
-module.exports = { register, login};
+module.exports = {
+  register,
+  login,
+};
