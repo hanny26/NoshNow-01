@@ -4,8 +4,8 @@ const authRoutes = express.Router();
 
 
 // router.get('/users', authController.getAllUsers);
-authRoutes.post("/register", authController.registerUser);
-authRoutes.post("/login", authController.loginUser);
+authRoutes.post("/register", authController.register);
+authRoutes.post("/login", authController.login);
 module.exports = authRoutes;
 
 
