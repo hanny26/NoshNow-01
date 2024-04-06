@@ -18,7 +18,15 @@ authController.post("/register", async (req, res) => {
         const {password, ...others} = newUser._doc; //it is to hide the password
         const token = jwt.sign({id: newUser._id, isAdmin: newUser.isAdmin}, process.env.JWT_SECRET, {expiresIn: "3d"}); //it is to create a token   
         
+        return res.status(201).json({others, token}); //it is to send the response
     } catch (error) {
         return res.status(500).json({error: error.message});
     }
 });
+
+// Login
+
+
+
+
+module.exports = authController; //it is to export the authController
