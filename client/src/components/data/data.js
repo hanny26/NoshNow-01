@@ -1,4 +1,26 @@
+import burger1 from '../assets/burger1.jpg'
+import burger2 from '../assets/burger2.jpg'
+import burger3 from '../assets/burger3.jpg'
+import burger4 from '../assets/burger4.jpg'
+import burger5 from '../assets/burger5.jpg'
 
+import gyros1 from '../assets/gyros1.jpg'
+import gyros2 from '../assets/gyros2.jpg'
+import gyros3 from '../assets/gyros3.jpg'
+import gyros4 from '../assets/gyros4.jpg'
+import gyros5 from '../assets/gyros5.jpg'
+
+import pizza1 from '../assets/pizza1.jpg'
+import pizza2 from '../assets/pizza2.jpg'
+import pizza3 from '../assets/pizza3.jpg'
+import pizza4 from '../assets/pizza4.jpg'
+import pizza5 from '../assets/pizza5.jpg'
+
+import pasta1 from '../assets/pasta1.jpg'
+import pasta2 from '../assets/pasta2.jpg'
+import pasta3 from '../assets/pasta3.jpg'
+import pasta4 from '../assets/pasta4.jpg'
+import pasta5 from '../assets/pasta5.jpg'
 
 
 export const foodTypes = [

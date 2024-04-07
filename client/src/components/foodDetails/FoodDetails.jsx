@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {useParams} from 'react-router-dom'
 import { useEffect } from 'react'
 import {AiOutlineShoppingCart} from 'react-icons/ai'
-import { addProduct } from '../../redux/cartSlice'
+import { addProduct } from '../redux/cartSlice'
 
 const FoodDetails = () => {
   const [foodDetails, setFoodsDetails] = useState('')

@@ -2,7 +2,7 @@ import React from 'react'
 import classes from './cart.module.css'
 import {useDispatch, useSelector} from 'react-redux'
 import {AiOutlineClose} from 'react-icons/ai'
-import { removeProduct } from '../../redux/cartSlice'
+import { removeProduct } from '../redux/cartSlice'
 import {useNavigate} from 'react-router-dom'
 
 const Cart = () => {

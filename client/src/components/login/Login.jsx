@@ -3,8 +3,8 @@ import { useState } from 'react'
 import classes from './login.module.css'
 import {useDispatch} from 'react-redux'
 import {Link, useNavigate} from 'react-router-dom'
-import img from '../../assets/womaneating2.jpg'
-import { login } from '../../redux/authSlice'
+// import img from '../../assets/womaneating2.jpg'
+import { login } from '../redux/authSlice'
 
 const Login = () => {
   const [email, setEmail] = useState("")
@@ -42,7 +42,7 @@ const Login = () => {
     <div className={classes.loginContainer}>
       <div className={classes.loginWrapper}>
         <div className={classes.loginLeftSide}>
-          <img src={img} className={classes.leftImg}/>
+          <img src="" className={classes.leftImg}/>
         </div>
         <div className={classes.loginRightSide}>
           <h2 className={classes.title}>Login</h2>

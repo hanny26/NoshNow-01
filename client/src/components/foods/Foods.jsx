@@ -1,5 +1,5 @@
 import React from 'react'
-import { foodTypes } from '../../data/data'
+import { foodTypes } from '../data/data'
 import {Link} from 'react-router-dom'
 import classes from './foods.module.css'
 
