@@ -1,37 +1,39 @@
-const multer = require('multer');
+const productController = require("express").Router()
+const Product = require("../models/Product")
+const {verifyToken, verifyTokenAdmin} = require('../middlewares/verifyToken')
 
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, '../public/images');
-    },
-    filename: (req, file, cb) => {
-        // You might want to generate a unique filename here
-        cb(null, file.originalname);
-    }
-});
-
-const upload = multer({ storage: storage });
-
-// POST /upload
-// Middleware: verifyToken
-// Uploads multiple image files
-const uploadImages = (req, res) => {
+// get all
+productController.get('/', verifyToken, async(req, res) => {
     try {
-        if (!req.files || req.files.length === 0) {
-            return res.status(400).json({ message: 'Please upload at least one file' });
-        }
-
-        // Process each file if needed
-        let fileNames = req.files.map(file => file.filename);
-
-        // Files uploaded successfully
-        return res.status(200).json({ message: 'Files uploaded successfully', fileNames: fileNames });
+        const products = await Product.find(req.query)
+        return res.status(200).json(products)
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        console.error(error)
     }
-};
+})
 
-module.exports = {
-    upload,
-    uploadImages
-};
+// get one
+productController.get('/find/:id', verifyToken, async(req, res) => {
+   try {
+    const productId = req.params.id
+    const product = await Product.findById(productId)
+    if(!product){
+        return res.status(500).json({msg: "No product with such id!"})
+    }
+    return res.status(200).json(product)
+   } catch (error) {
+    console.error(error)
+   }
+})
+
+// create product
+productController.post('/', verifyTokenAdmin, async(req, res) => {
+    try {
+        const newProduct = await Product.create({...req.body})
+        return res.status(201).json(newProduct)
+    } catch (error) {
+        console.error(error)
+    }
+})
+
+module.exports = productController
