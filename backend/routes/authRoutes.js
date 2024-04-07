@@ -5,7 +5,7 @@ const productController = require("../controllers/productController.js");
 const { verifyToken, verifyTokenAdmin } = require("../middlewares/verifyToken.js");
 const multer = require('multer');
 const { upload , uploadImages } = require('../controllers/uploadController');
-const {checkRole} = require('../middlewares/checkRole');
+const {checkRole} = require('../middlewares/checkrole.js');
 // const verifyToken = require('../middlewares/verifyToken');
 
 

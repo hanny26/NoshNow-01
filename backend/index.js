@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes');
 const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+
 
 const app = express();
 app.use(bodyParser.json());
@@ -17,6 +19,7 @@ mongoose.connect(process.env.MONGO_URL, {
   .then(() => console.log("Database is successfully connected"))
   .catch(err => console.error("Database connection error:", err));
 
+  app.use(cookieParser());
 // CORS Configuration
 const allowedOrigins = ['http://localhost:3000']; // Adjust as needed
 app.use(cors({

@@ -1,22 +1,34 @@
 const jwt = require('jsonwebtoken');
+const userData = require('../models/User');
 
 // Route to check the role of the user based on the token
-function checkRole(req, res) {
-  const token = req.headers.authorization.split(' ')[1]; // Get the token from headers
-
+const checkRole = async (req, res,next)=> {
+ 
   try {
-    // Verify the token
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-    // Check the role in the decoded token
-    if (decoded.role === 'admin') {
-      return res.status(200).json({ message: 'Admin User Role' });
-    } else {
-      return res.status(200).json({ message: 'Regular User Role' });
+    // Get the token from the header
+    // token store kya thay? login ma
+    const token = req.cookies.token; // Corrected token retrieval
+    
+    if (!token) {
+      throw new Error('Token not found');
     }
+    
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    // console.log("Decoded token:", decoded);
+    // console.log("Decoded token ID:", decoded.id);
+
+    const user = await userData.findOne({ email: decoded.email });
+    
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    req.token = token;
+    req.user = user;
+    next();
   } catch (error) {
-    console.error(error);
-    return res.status(401).json({ message: 'Invalid token' });
+    console.error("Authentication error:", error);
+    res.status(401).send({ error: "Please authenticate" });
   }
 }
 

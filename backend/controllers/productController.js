@@ -10,6 +10,7 @@ const getAllProducts = async (req, res) => {
         return res.status(500).json({ error: 'Server Error' });
     }
 };
+// register ane login kya hai?
 
 // Get one product by ID
 const getProductById = async (req, res) => {

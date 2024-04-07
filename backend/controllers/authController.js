@@ -2,12 +2,12 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const { checkRole } = require('../middlewares/checkrole');
-
+const cookieParser = require('cookie-parser');  
 // Register a new user
 async function register(req, res) {
-  const { username, email, password, isAdmin } = req.body;
-
+  
   try {
+    const { username, email, password, isAdmin } = req.body;
     // Check if the email is already in use
     const existingUser = await User.findOne({ email });
     if (existingUser) {
@@ -60,15 +60,17 @@ async function login(req, res) {
     };
 
     if (user.isAdmin) {
-      tokenPayload.role = 'admin';
+      tokenPayload.isAdmin = true;
     } else {
-      tokenPayload.role = 'regular';
+      tokenPayload.isAdmin = false;
     }
 
     // Set JWT token expiration to 1 hour
     const token = jwt.sign(tokenPayload, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-    return res.status(200).json({ message: 'Login successful', token });
+    return res.status(200)
+    .cookie('token', token, { httpOnly: true,})
+    .json({ message: 'Login successful', token });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: 'Internal server error' });
