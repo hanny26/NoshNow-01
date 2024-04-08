@@ -1,39 +1,29 @@
-const productController = require("express").Router()
-const Product = require("../models/Product")
-const {verifyToken, verifyTokenAdmin} = require('../middlewares/verifyToken')
+const uploadController = require('express').Router()
 
-// get all
-productController.get('/', verifyToken, async(req, res) => {
-    try {
-        const products = await Product.find(req.query)
-        return res.status(200).json(products)
-    } catch (error) {
-        console.error(error)
+const multer = require('multer')
+const {verifyToken} = require('../middlewares/verifyToken')
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "public/images")
+    },
+    filename: (req, file, cb) => {
+        cb(null, req.body.filename)
     }
 })
 
-// get one
-productController.get('/find/:id', verifyToken, async(req, res) => {
-   try {
-    const productId = req.params.id
-    const product = await Product.findById(productId)
-    if(!product){
-        return res.status(500).json({msg: "No product with such id!"})
-    }
-    return res.status(200).json(product)
-   } catch (error) {
-    console.error(error)
-   }
+const upload = multer({
+    storage
+    // same as storage: storage
 })
 
-// create product
-productController.post('/', verifyTokenAdmin, async(req, res) => {
-    try {
-        const newProduct = await Product.create({...req.body})
-        return res.status(201).json(newProduct)
-    } catch (error) {
-        console.error(error)
-    }
+// req.body.image
+uploadController.post('/image', verifyToken, upload.single('image'), (req, res) => {
+  try {
+    return res.status(201).json({msg: "Successfully uploaded file"})
+  } catch (error) {
+    console.error(error.message)
+  }
 })
 
-module.exports = productController
+module.exports = uploadController

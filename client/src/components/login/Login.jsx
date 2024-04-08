@@ -4,7 +4,7 @@ import classes from './login.module.css'
 import {useDispatch} from 'react-redux'
 import {Link, useNavigate} from 'react-router-dom'
 // import img from '../../assets/womaneating2.jpg'
-import { login } from '../redux/authSlice'
+import { login } from '../../redux/authSlice'
 
 const Login = () => {
   const [email, setEmail] = useState("")

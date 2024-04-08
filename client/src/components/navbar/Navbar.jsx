@@ -4,7 +4,7 @@ import classes from './navbar.module.css'
 import {AiOutlineUser, AiOutlineShoppingCart} from 'react-icons/ai'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { logout } from "../redux/authSlice";
+import { logout } from '../../redux/authSlice'
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false)

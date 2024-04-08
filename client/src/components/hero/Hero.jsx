@@ -1,7 +1,7 @@
 import React from 'react'
 import classes from './hero.module.css'
 import {AiOutlineArrowDown} from 'react-icons/ai'
-// import manEating from '../../assets/man-having-his-meal.svg'
+import manEating from '../../assets/man-having-his-meal.svg'
 
 const Hero = () => {
   return (

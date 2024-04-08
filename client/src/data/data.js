@@ -1,6 +1,6 @@
 import burger1 from '../assets/burger1.jpg'
-import burger2 from '../assets/burger2.jpg'
-import burger3 from '../assets/burger3.jpg'
+import burger2 from '../assets/burger2.jpg';
+import burger3 from '../assets/burger3.jpg';
 import burger4 from '../assets/burger4.jpg'
 import burger5 from '../assets/burger5.jpg'
 
